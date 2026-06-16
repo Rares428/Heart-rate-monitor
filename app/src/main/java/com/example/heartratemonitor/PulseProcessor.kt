@@ -112,11 +112,11 @@ class PulseProcessor {
 
     companion object {
         private const val WINDOW_NANOS = 8_000_000_000L     // 8 secunde de istoric
-        private const val BASELINE_WINDOW = 32              // ~1s la 30fps pentru detrend
-        private const val PEAK_STD_FACTOR = 0.5             // varf > 0.5 * deviatia standard
+        private const val BASELINE_WINDOW = 14              // ~0.5s: high-pass care taie unda lenta de respiratie
+        private const val PEAK_STD_FACTOR = 0.45            // prag echilibrat: prinde toate bataile fara zgomot
 
-        private const val MIN_PEAK_INTERVAL_NANOS = 270_000_000L // < 220 BPM
-        private const val MIN_INTERVAL_SEC = 60.0 / 220.0
+        private const val MIN_PEAK_INTERVAL_NANOS = 333_000_000L // < 180 BPM (taie dublarile de varfuri)
+        private const val MIN_INTERVAL_SEC = 60.0 / 180.0
         private const val MAX_INTERVAL_SEC = 60.0 / 30.0
 
         private const val MIN_PEAKS = 3                     // minim 3 varfuri ca sa dam o cifra
